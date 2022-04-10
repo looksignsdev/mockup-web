@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" id="home">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup | Look Signs</title>
+
+    <meta name="description" content="Sign mockup! - Look Signs">
+    <meta name="author" content="ZM">
+
+    <meta property="og:title" content="Mockup | Look Signs">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Sign mockup! - Look Signs">
+
+    <link rel="stylesheet" href="/static/css/index.css">
+
+    <script src="https://cdn.tiny.cloud/1/ils63n5kjkic8nkans90m5la0vdn2a5wsxlvt5n5bn4up18s/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+      tinymce.init({
+        selector:'textarea',
+        remove_linebreaks : false,
+        force_br_newlines : true,
+        width: 480,
+        height: "400"
+      });
+    </script>
+
+</head>
+<body>
+    <div class="topnav">
+        <img src="/static/img/logo2.png" height="30px"></img>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/static/js/index.js"></script>
+    <script>
+      function outputImage() {
+        html2canvas(document.querySelector("#m-out-wrapper")).then(canvas => {
+            document.getElementById('canvas-out-wrapper').appendChild(canvas);
+        });
+      }
+
+      function onSubmit() {
+        const in_text = tinyMCE.activeEditor.getContent();
+
+        var open_pink = in_text.replace(/<em>/g, '<span class="red-color">')
+        var close_pink = open_pink.replace(/<\/em>/g, "</span>");
+
+        var open_yellow = close_pink.replace(/<strong>/g, '<span class="yellow-color">')
+        var close_yellow = open_yellow.replace(/<\/strong>/g, "</span>");
+
+        var open_big = close_yellow.replace(/h1/g, 'h1 class="big-letters"');
+
+        var open_sl_small = open_big.replace(/\[sm\]/g, '<span class="small-letters">');
+        var close_sl_small = open_sl_small.replace(/\[\/sm\]/g, '</span>');
+
+        var open_top = close_sl_small.replace(/\[top\]/g, '<span class="top-letters">');
+        var close_top = open_top.replace(/\[\/top\]/g, '</span>');
+
+        var open_med = close_top.replace(/\[med\]/g, '<span class="multi-line">');
+        var close_med = open_med.replace(/\[\/med\]/g, '</span>');
+
+        var cause_split = close_med.replace(/\[nl\]/g, '<br>');
+
+        var open_no_margin = cause_split.replace(/<h2>/g, '<h1 class="no-margin">');
+        var close_no_margin = open_no_margin.replace(/<\/h2>/g, '</h1>');
+
+        var open_www = close_no_margin.replace(/\[www\]/g, '<span class="special-letters">WWW.</span>');
+        var open_ca = open_www.replace(/\[ca\]/g, '<span class="special-letters">.CA</span>');
+        var open_com = open_ca.replace(/\[com\]/g, '<span class="special-letters">.COM</span>');
+        var open_am = open_com.replace(/\[am\]/g, '<span class="special-letters">AM</span>');
+        var open_pm = open_am.replace(/\[pm\]/g, '<span class="special-letters">PM</span>');
+        var open_dollar = open_pm.replace(/\[\$\]/g, '<span class="thin-letters">$</span>');
+        var open_big_dollar = open_dollar.replace(/\[\$\$\]/g, '<span class="big-thin" style="top: -5px;">$</span>');
+
+        var open_pct = open_big_dollar.replace(/\[%\]/g, '<span class="thin-letters">%</span>');
+        var open_big_pct = open_pct.replace(/\[%%\]/g, '<span class="big-thin">%</span>');
+
+        var open_905 = open_big_pct.replace(/\[905\]/g, '<span class="vertical-letters">905</span>');
+        var open_416 = open_905.replace(/\[416\]/g, '<span class="vertical-letters">416</span>');
+        var open_647 = open_416.replace(/\[647\]/g, '<span class="vertical-letters">647</span>');
+
+        var left_arrow = open_647.replace(/\[leftarrow\]/g, '<span class="symbols">⬅</span>');
+        var right_arrow = left_arrow.replace(/\[rightarrow\]/g, '<span class="symbols">⮕</span>');
+
+        document.getElementById('m-out').innerHTML = right_arrow;
+        console.log(document.getElementById('m-out').innerHTML);
+      }
+    </script>
+</body>
+</html>
